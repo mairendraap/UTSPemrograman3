@@ -1,13 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Student Risk Prediction</h1>
-<p>Starter Web Application — Pemrograman III</p>
+<p>Dashboard — Pemrograman III (UTS). Prediksi: LOW ≥75, MEDIUM ≥55, HIGH &lt;55.</p>
 
 <section class="cards">
     <div class="card"><h3>Total Students</h3><strong>{{ summary.total }}</strong></div>
-    <div class="card"><h3>High Risk</h3><strong>{{ summary.high_risk }}</strong></div>
-    <div class="card"><h3>Low Risk</h3><strong>{{ summary.low_risk }}</strong></div>
+    <div class="card danger"><h3>High Risk</h3><strong>{{ summary.high_risk }}</strong><small>{{ summary.high_pct }}%</small></div>
+    <div class="card warn"><h3>Medium Risk</h3><strong>{{ summary.medium_risk }}</strong><small>{{ summary.medium_pct }}%</small></div>
+    <div class="card ok"><h3>Low Risk</h3><strong>{{ summary.low_risk }}</strong><small>{{ summary.low_pct }}%</small></div>
+    <div class="card"><h3>Avg Score</h3><strong>{{ summary.avg_score }}</strong><small>min {{ summary.min_score }} / max {{ summary.max_score }}</small></div>
 </section>
+
+<h2>Butuh Perhatian (score terendah)</h2>
+<table>
+<tr><th>Name</th><th>Score</th><th>Risk</th></tr>
+{% for student in attention %}
+<tr>
+    <td>{{ student.name }}</td>
+    <td>{{ "%.2f"|format(student.score) }}</td>
+    <td><span class="badge badge-{{ student.risk|lower }}">{{ student.risk }}</span></td>
+</tr>
+{% else %}
+<tr><td colspan="3">Belum ada data.</td></tr>
+{% endfor %}
+</table>
 
 <h2>Student Overview</h2>
 <table>
@@ -16,7 +32,7 @@
 <tr>
     <td>{{ student.name }}</td>
     <td>{{ "%.2f"|format(student.score) }}</td>
-    <td>{{ student.risk }}</td>
+    <td><span class="badge badge-{{ student.risk|lower }}">{{ student.risk }}</span></td>
 </tr>
 {% endfor %}
 </table>

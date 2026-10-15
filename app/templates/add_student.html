@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Student</h1>
+<p>Risk diprediksi otomatis: LOW ≥75, MEDIUM ≥55, HIGH &lt;55.</p>
+<form method="post" class="form">
+    <label for="name">Nama:</label>
+    <input id="name" type="text" name="name" value="{{ name }}" maxlength="100" required>
+    <label for="score">Score (0-100):</label>
+    <input id="score" type="number" name="score" value="{{ score }}" min="0" max="100" step="0.01" required>
+    <button type="submit">Simpan</button>
+    <a class="btn" href="/students">Batal</a>
+</form>
+{% endblock %}
