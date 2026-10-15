@@ -14,6 +14,21 @@ services:
     networks:
       - student-network
 
+  web2:
+    build: .
+    container_name: student-risk-web2
+    ports:
+      - "8081:5000"
+    environment:
+      DB_HOST: db
+      POSTGRES_DB: student_risk
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student123
+    depends_on:
+      - db
+    networks:
+      - student-network
+
   db:
     image: postgres:16-alpine
     container_name: student-risk-db
