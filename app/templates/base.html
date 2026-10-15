@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,20 @@
 <nav>
     <a href="/">Dashboard</a>
     <a href="/students">Students</a>
+    <a href="/students/add">Add Student</a>
+    <a href="/api/stats">API Stats</a>
 </nav>
-<main>{% block content %}{% endblock %}</main>
+<main>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-wrap">
+{% for cat, msg in messages %}
+<div class="alert alert-{{ cat }}">{{ msg }}</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</main>
 </body>
 </html>
