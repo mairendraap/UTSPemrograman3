@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student Risk Prediction</h1>
+<p>Starter Web Application — Pemrograman III</p>
+
+<section class="cards">
+    <div class="card"><h3>Total Students</h3><strong>{{ summary.total }}</strong></div>
+    <div class="card"><h3>High Risk</h3><strong>{{ summary.high_risk }}</strong></div>
+    <div class="card"><h3>Low Risk</h3><strong>{{ summary.low_risk }}</strong></div>
+</section>
+
+<h2>Student Overview</h2>
+<table>
+<tr><th>Name</th><th>Score</th><th>Risk</th></tr>
+{% for student in students %}
+<tr>
+    <td>{{ student.name }}</td>
+    <td>{{ "%.2f"|format(student.score) }}</td>
+    <td>{{ student.risk }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

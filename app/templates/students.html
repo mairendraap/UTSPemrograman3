@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Students</h1>
+
+<form method="get">
+    <label for="risk">Risk:</label>
+    <select id="risk" name="risk">
+        <option value="ALL" {% if selected_risk == "ALL" %}selected{% endif %}>All</option>
+        <option value="HIGH_RISK" {% if selected_risk == "HIGH_RISK" %}selected{% endif %}>High Risk</option>
+        <option value="LOW_RISK" {% if selected_risk == "LOW_RISK" %}selected{% endif %}>Low Risk</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+<tr><th>ID</th><th>Name</th><th>Score</th><th>Risk</th></tr>
+{% for student in students %}
+<tr>
+    <td>{{ student.student_id }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ "%.2f"|format(student.score) }}</td>
+    <td>{{ student.risk }}</td>
+</tr>
+{% else %}
+<tr><td colspan="4">No students found.</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
